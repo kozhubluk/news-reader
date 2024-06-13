@@ -1,0 +1,13 @@
+:root {
+  --font-family: "Fira Sans", serif;
+
+  // стандартный шрифт
+  --font-size-m: 16px;
+  --font-height-m: 24px;
+  --font-m: var(--font-size-m)/var(--font-height-m) var(--font-family);
+
+  // увеличенный шрифт
+  --font-size-l: 24px;
+  --font-height-l: 32px;
+  --font-l: var(--font-size-l)/var(--font-height-l) var(--font-family);
+}
