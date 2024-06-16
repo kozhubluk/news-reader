@@ -1,7 +1,7 @@
-function MainPage() {
+const MainPage: React.FC = () => {
     return <div>
         Тут главная страница
     </div>
 }
 
-export default MainPage;
+export default MainPage

@@ -1,11 +1,11 @@
-import {useTranslation} from "react-i18next";
+import { useTranslation } from 'react-i18next'
 
-function InfoPage() {
-    const {t} = useTranslation("info")
+const InfoPage: React.FC = () => {
+    const { t } = useTranslation('info')
 
     return <div>
-        {t("Информация тута")}
+        {t('Информация тута')}
     </div>
 }
 
-export default InfoPage;
+export default InfoPage

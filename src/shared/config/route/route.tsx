@@ -1,6 +1,6 @@
-import {RouteProps} from "react-router-dom";
-import {MainPage} from "pages/MainPage";
-import {InfoPage} from "pages/InfoPage";
+import { type RouteProps } from 'react-router-dom'
+import { MainPage } from 'pages/MainPage'
+import { InfoPage } from 'pages/InfoPage'
 
 enum Route {
     MAIN = 'main',
@@ -20,5 +20,5 @@ export const routeConfig: Record<Route, RouteProps> = {
     [Route.INFO]: {
         path: RoutePaths.info,
         element: <InfoPage />
-    },
+    }
 }
