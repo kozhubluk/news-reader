@@ -10,4 +10,9 @@
   --font-size-l: 24px;
   --font-height-l: 32px;
   --font-l: var(--font-size-l)/var(--font-height-l) var(--font-family);
+
+  // размерности
+  --sidebar-width: 180px;
+  --sidebar-width-hidden: 50px;
+  --navbar-height: 50px;
 }

@@ -1,0 +1,11 @@
+.sidebar {
+  background-color: pink;
+  height: 100vh;
+  width: var(--sidebar-width);
+  transition: .3s;
+}
+
+.hidden {
+  background-color: rebeccapurple;
+  width: var(--sidebar-width-hidden);
+}

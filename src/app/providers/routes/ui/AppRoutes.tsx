@@ -5,7 +5,7 @@ import {routeConfig} from "shared/config/route/route";
 export const AppRoutes: React.FC = () => {
     return <Suspense>
         <Routes>
-            {Object.values(routeConfig).map(value => <Route path={value.path} element={value.element}></Route>)}
+            {Object.values(routeConfig).map(value => <Route key={value.path} path={value.path} element={value.element}></Route>)}
         </Routes>
     </Suspense>
 }

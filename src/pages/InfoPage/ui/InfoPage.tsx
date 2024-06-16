@@ -1,6 +1,10 @@
+import {useTranslation} from "react-i18next";
+
 function InfoPage() {
+    const {t} = useTranslation("info")
+
     return <div>
-        Информация тута
+        {t("Информация тута")}
     </div>
 }
 
