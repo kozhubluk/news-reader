@@ -1,5 +1,5 @@
 :root {
-  --font-family: "Fira Sans", serif;
+  --font-family: 'Fira Sans', serif;
 
   // стандартный шрифт
   --font-size-m: 16px;
@@ -15,4 +15,7 @@
   --sidebar-width: 180px;
   --sidebar-width-hidden: 50px;
   --navbar-height: 50px;
+
+  // z-индексы
+  --modal-z-index: 10;
 }

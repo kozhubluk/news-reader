@@ -2,6 +2,7 @@
   "extends": "stylelint-config-standard-scss",
   "defaultSeverity": "warning",
   "rules": {
-    "block-no-empty": true
+    "block-no-empty": true,
+    "at-rule-empty-line-before": ["always", {"except": ["after-same-name"]}]
   }
 }

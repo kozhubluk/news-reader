@@ -15,7 +15,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
     function toggleSidebar (): void {
         setHidden(prev => !prev)
     }
-    return <div className={classNames(styles.sidebar, { [styles.hidden]: hidden }, [styles[className]])}>
+    return <div className={classNames(styles.sidebar,
+        { [styles.hidden]: hidden },
+        [styles[className]])}>
         <Button onClick={toggleSidebar}>{t('Toggle')}</Button>
     </div>
 }

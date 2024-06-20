@@ -3,12 +3,19 @@ import * as styles from './Button.module.scss'
 import { type ButtonHTMLAttributes } from 'react'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    className?: string
+    className?: string,
+    theme?: ButtonTheme
+}
+
+export enum ButtonTheme {
+    OUTLINE = 'outline'
 }
 
 export const Button: React.FC<ButtonProps> = (props) => {
-    const { children, className, ...otherProps } = props
-    return <button className={classNames(styles.button, {}, [styles[className]])} {...otherProps}>
+    const { children, className,theme, ...otherProps } = props
+    return <button
+        className={classNames(styles.button, {},
+            [className, styles[theme]])} {...otherProps}>
         {children}
     </button>
 }
