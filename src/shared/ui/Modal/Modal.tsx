@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames'
 import * as styles from './Modal.module.scss'
-import React, { MouseEvent, useCallback, useEffect } from 'react'
+import React, { MouseEvent, useCallback, useEffect, useState } from 'react'
 import { useTheme } from 'app/providers/theme'
 import { Portal } from '../Portal/Portal'
 
@@ -9,10 +9,13 @@ interface ModalProps {
     isOpen?: boolean
     onClose?: () => void
     className?: string
+    lazy?: boolean
 }
 
 export const Modal: React.FC<ModalProps> = (props) => {
-    const { className, children, isOpen, onClose } = props
+    const { className, children, isOpen, onClose, lazy = true } = props
+
+    const [isMounted, setIsMounted] = useState<boolean>(false);
 
     const { theme } = useTheme();
 
@@ -38,11 +41,21 @@ export const Modal: React.FC<ModalProps> = (props) => {
 
     useEffect(() => {
         if (isOpen) {
+            setIsMounted(true)
+        }
+    }, [isOpen]);
+
+    useEffect(() => {
+        if (isOpen) {
             document.addEventListener('keydown', onKeydown)
         }
 
         return () => {document.removeEventListener('keydown', onKeydown)}
     }, [isOpen, onKeydown])
+
+    if (lazy && !isMounted) {
+        return null
+    }
 
     return <Portal>
         <div className={classNames(styles.modal, mods, [className, theme])}>

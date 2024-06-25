@@ -14,7 +14,7 @@ export enum ButtonTheme {
 export const Button: React.FC<ButtonProps> = (props) => {
     const { children, className,theme, ...otherProps } = props
     return <button
-        className={classNames(styles.button, {},
+        className={classNames(styles.Button, {},
             [className, styles[theme]])} {...otherProps}>
         {children}
     </button>

@@ -1,5 +1,7 @@
-.button {
-  border: none;
+.Button {
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 .outline {

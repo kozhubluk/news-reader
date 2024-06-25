@@ -1,5 +1,7 @@
-import { CounterSchema } from "enities/counter";
+import { UserSchema } from "enities/user";
+import { LoginSchema } from "features/auth/model/types/LoginSchema";
 
 export interface StateSchema {
-    counter: CounterSchema
+    user: UserSchema
+    login: LoginSchema
 }

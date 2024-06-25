@@ -44,6 +44,8 @@ module.exports = {
     'react/prop-types': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     'object-curly-spacing': ['error', 'always'],
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'max-len': [
       'error',
       {
