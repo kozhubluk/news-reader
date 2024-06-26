@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames'
 import * as styles from './Input.module.scss'
-import { ChangeEvent, InputHTMLAttributes } from 'react'
+import { ChangeEvent, InputHTMLAttributes, memo, useCallback } from 'react'
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "onChange">
 
@@ -10,12 +10,12 @@ interface InputProps extends HTMLInputProps {
     onChange?: (value: string) => void
 }
 
-export const Input: React.FC<InputProps> = (props) => {
+export const Input = memo(function Input(props: InputProps) {
     const { className, onChange, value, type = 'text', ...otherProps } = props
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         onChange?.(e.target.value)
-    }
+    }, [onChange])
 
     return <input className={classNames(styles.Input, {}, [className])}
         value={value}
@@ -23,4 +23,4 @@ export const Input: React.FC<InputProps> = (props) => {
         onChange={onChangeHandler}
         {...otherProps}
     />
-}
+});

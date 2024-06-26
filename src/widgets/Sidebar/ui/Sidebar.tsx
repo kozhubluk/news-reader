@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames'
 import * as styles from './Sidebar.module.scss'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { Button } from 'shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
 
@@ -8,7 +8,7 @@ interface SidebarProps {
     className?: string
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
+export const Sidebar = memo(function Sidebar({ className }: SidebarProps) {
     const [hidden, setHidden] = useState<boolean>(false)
     const { t } = useTranslation()
 
@@ -20,4 +20,4 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
         [styles[className]])}>
         <Button onClick={toggleSidebar}>{t('Toggle')}</Button>
     </div>
-}
+})

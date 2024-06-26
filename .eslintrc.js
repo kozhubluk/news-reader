@@ -46,10 +46,11 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'eslint-disable-next-line' : 'off',
     'max-len': [
       'error',
       {
-        code: 100,
+        code: 110,
         ignoreComments: true,
       },
     ],
