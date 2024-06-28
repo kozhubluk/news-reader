@@ -1,4 +1,4 @@
-import { classNames } from 'shared/lib/classNames/classNames'
+import { classNames, Mode } from 'shared/lib/classNames/classNames'
 import * as styles from './Modal.module.scss'
 import React, { MouseEvent, useCallback, useEffect, useState } from 'react'
 import { useTheme } from 'app/providers/theme'
@@ -19,7 +19,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
 
     const { theme } = useTheme();
 
-    const mods: Record<string, boolean> = {
+    const mods: Mode = {
         [styles.open]: isOpen,
     }
 

@@ -12,7 +12,7 @@ export enum ButtonTheme {
 }
 
 export const Button = memo(function Button(props: ButtonProps) {
-    const { children, className,theme, ...otherProps } = props
+    const { children, className,theme = ButtonTheme.OUTLINE, ...otherProps } = props
 
     return <button
         className={classNames(styles.Button, {},

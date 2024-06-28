@@ -1,8 +1,6 @@
-import { AnyAction, combineReducers, Reducer } from "@reduxjs/toolkit";
+import { combineReducers } from "@reduxjs/toolkit";
 import { IReducerManager, StateSchema, StateSchemaKey } from "app/providers/redux/config/StateSchema";
 import type { ReducersMapObject } from "redux";
-
-
 
 export function createReducerManager(initialReducers: ReducersMapObject<StateSchema>): IReducerManager {
     const reducers = { ...initialReducers }
@@ -13,19 +11,20 @@ export function createReducerManager(initialReducers: ReducersMapObject<StateSch
 
     return {
         getReducerMap: () => reducers,
-        reduce: (state: StateSchema, action: AnyAction) => {
+        reduce: (state, action) => {
             if (keysToRemove.length > 0) {
-                state = { ...state }
+                state = { ...state };
                 for (const key of keysToRemove) {
-                    delete state[key]
+                    delete state[key];
                 }
-                keysToRemove = []
+                keysToRemove = [];
             }
 
-            return combinedReducer(state, action)
+            // @ts-ignore
+            return combinedReducer(state, action);
         },
 
-        add: (key: StateSchemaKey, reducer: Reducer) => {
+        add: (key, reducer) => {
             if (!key || reducers[key]) {
                 return
             }
@@ -35,7 +34,7 @@ export function createReducerManager(initialReducers: ReducersMapObject<StateSch
             combinedReducer = combineReducers(reducers)
         },
 
-        remove: (key: StateSchemaKey) => {
+        remove: (key) => {
             if (!key || !reducers[key]) {
                 return
             }

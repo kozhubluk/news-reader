@@ -8,7 +8,7 @@ import { selectUserState } from "enities/user/model/selectors/selectUserState";
 import { logout } from "enities/user/model/slice/userSlice";
 import { Button } from "shared/ui/Button/Button";
 import { useAppDispatch } from "shared/lib/hooks/useDispatch";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 
 interface NavbarProps {
     classname?: string
@@ -19,19 +19,20 @@ export const Navbar = memo(function Navbar({ classname } : NavbarProps) {
     const userData = useSelector(selectUserState)
     const dispatch = useAppDispatch();
 
+    const onLogoutClick = useCallback(() => {
+        dispatch(logout())
+    }, [dispatch])
+
     if (!userData) {
-        return <div className={classNames(styles.navbar, {}, [styles[classname]])}>
+        return <div className={classNames(styles.navbar, {}, [classname])}>
             <ThemeSwitcher/>
         </div>
     }
-
-    const onLogoutClick = () => {
-        dispatch(logout())
-    }
-
-    return <div className={classNames(styles.navbar, {}, [styles[classname]])}>
+    
+    return <div className={classNames(styles.navbar, {}, [classname])}>
         <AppLink to="/">{t('Главная страница')}</AppLink>
         <AppLink to="/info">{t('Информация')}</AppLink>
+        <AppLink to="/profile">{t('Профиль')}</AppLink>
         <ThemeSwitcher/>
         <Button onClick={onLogoutClick}>Выйти</Button>
     </div>

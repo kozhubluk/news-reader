@@ -19,7 +19,7 @@ export const LangSwitcher = memo(function LangSwitcher({ className }: LangSwitch
         }
     }, [i18n])
 
-    return <Button className={classNames('', {}, [styles[className]])}
+    return <Button className={classNames('', {}, [className])}
         onClick={toggleLang}>
         {i18n.language}
     </Button>

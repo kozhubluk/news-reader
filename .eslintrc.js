@@ -47,10 +47,11 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'eslint-disable-next-line' : 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     'max-len': [
       'error',
       {
-        code: 110,
+        code: 120,
         ignoreComments: true,
       },
     ],

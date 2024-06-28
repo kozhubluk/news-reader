@@ -28,7 +28,7 @@ export const loginSlice = createSlice({
                 state.loading = false
                 state.error = undefined
             })
-            .addCase(authUserByUsername.rejected, (state, action: PayloadAction<string>) => {
+            .addCase(authUserByUsername.rejected, (state, action: PayloadAction<string | undefined>) => {
                 state.loading = false
                 state.error = action.payload
             })

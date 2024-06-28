@@ -17,7 +17,7 @@ export const Sidebar = memo(function Sidebar({ className }: SidebarProps) {
     }
     return <div className={classNames(styles.sidebar,
         { [styles.hidden]: hidden },
-        [styles[className]])}>
+        [className])}>
         <Button onClick={toggleSidebar}>{t('Toggle')}</Button>
     </div>
 })

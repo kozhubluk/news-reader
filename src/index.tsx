@@ -6,7 +6,7 @@ import { createRoot } from 'react-dom/client'
 import 'shared/config/i18n/i18n'
 import { StoreProvider } from "app/providers/redux/ui/StoreProvider";
 
-const root = createRoot(document.getElementById('root'))
+const root = createRoot(document.getElementById('root')!)
 root.render(<BrowserRouter>
     <ThemeProvider>
         <StoreProvider>

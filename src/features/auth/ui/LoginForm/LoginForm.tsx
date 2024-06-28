@@ -12,10 +12,11 @@ import { memo, useCallback } from "react";
 
 interface LoginFormProps {
     className?: string
+    onSuccessLogin?: () => void
 }
 
 const LoginForm = memo(function LoginForm(props: LoginFormProps) {
-    const { className } = props
+    const { className, onSuccessLogin } = props
     const { username, password, error, loading } = useSelector(selectLoginState)
 
     const dispatch = useAppDispatch()
@@ -28,9 +29,12 @@ const LoginForm = memo(function LoginForm(props: LoginFormProps) {
         dispatch(setPassword(value))
     }, [dispatch])
 
-    const onAuth = useCallback(() => {
-        dispatch(authUserByUsername({ username, password }))
-    }, [dispatch, username, password])
+    const onAuth = useCallback(async () => {
+        const response = await dispatch(authUserByUsername({ username, password }))
+        if (response.meta.requestStatus === 'fulfilled') {
+            if (onSuccessLogin) onSuccessLogin()
+        }
+    }, [dispatch, username, password, onSuccessLogin])
 
     return <DynamicReducerLoader
         keyName={'login'}
