@@ -1,0 +1,51 @@
+.ProfileEditForm {
+  form {
+    background-color: var(--dark-background-color);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 400px;
+  }
+
+  .headerWrapper {
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    font-weight: 900;
+
+    .header {
+      font-weight: 600;
+    }
+  }
+
+  .formBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius-l);
+    padding: 20px;
+
+    &:nth-child(1) {
+      padding-top: calc(var(--font-height-l) + 2 * 12px);
+    }
+
+    .bottomBlock {
+      display: grid;
+      gap: 8px;
+      grid-template-rows: auto auto auto;
+      grid-template-columns: auto auto;
+
+      .button {
+        margin-top: 10px;
+        padding: 14px;
+        font-weight: 600;
+        grid-column: 1 / 3;
+      }
+    }
+  }
+}
+

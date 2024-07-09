@@ -6,8 +6,8 @@ import { Portal } from '../Portal/Portal'
 
 interface ModalProps {
     children: React.ReactNode | string
-    isOpen?: boolean
-    onClose?: () => void
+    isOpen: boolean
+    onClose: () => void
     className?: string
     lazy?: boolean
 }

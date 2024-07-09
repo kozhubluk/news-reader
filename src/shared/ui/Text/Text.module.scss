@@ -1,0 +1,32 @@
+.Text{
+  font-size: var(--font-height-s);
+  color: var(--primary-color);
+}
+
+// размерности текста
+
+.small {
+  font: var(--font-height-s);
+}
+
+.middle {
+  font: var(--font-m)
+}
+
+.large {
+  font: var(--font-l)
+}
+
+.extraLarge {
+  font: var(--font-xl)
+}
+
+// Темы кнопок
+
+.primary {
+  color: var(--primary-color);
+}
+
+.secondary {
+  color: var(--secondary-color);
+}

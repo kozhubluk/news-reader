@@ -1,0 +1,19 @@
+.GenderSelection {
+  border-radius: var(--border-radius-m);
+  background-color: var(--dark-background-color);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 2.5px;
+
+  .button {
+    color: var(--secondary-color);
+    background-color: var(--dark-background-color);
+  }
+
+  .selected {
+    background-color: var(--secondary-background-color);
+    color: var(--primary-color);
+
+  }
+}

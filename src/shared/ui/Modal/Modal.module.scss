@@ -25,10 +25,10 @@
   width: fit-content;
   margin: auto;
   justify-self: center;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: var(--border-radius-l);
   transform: translateY(-40px);
   transition: 0.2s;
+  overflow: hidden;
 }
 
 .open {

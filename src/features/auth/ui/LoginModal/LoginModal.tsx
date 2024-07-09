@@ -6,8 +6,8 @@ import { memo, Suspense, useCallback } from "react";
 
 interface LoginModalProps {
     className?: string,
-    isOpen?: boolean
-    onClose?: () => void
+    isOpen: boolean
+    onClose: () => void
 }
 
 export const LoginModal = memo(function LoginModal(props: LoginModalProps) {

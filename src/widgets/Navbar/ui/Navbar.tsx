@@ -8,7 +8,8 @@ import { selectUserState } from "enities/user/model/selectors/selectUserState";
 import { logout } from "enities/user/model/slice/userSlice";
 import { Button } from "shared/ui/Button/Button";
 import { useAppDispatch } from "shared/lib/hooks/useDispatch";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
+import { ProfileModal } from "enities/profile/ui/ProfileModal/ProfileModal";
 
 interface NavbarProps {
     classname?: string
@@ -23,6 +24,11 @@ export const Navbar = memo(function Navbar({ classname } : NavbarProps) {
         dispatch(logout())
     }, [dispatch])
 
+    const [isOpen, setIsOpen] = useState(false)
+    const onClose = useCallback(() => setIsOpen(false), [])
+
+    const onProfileClick = useCallback(() => {setIsOpen(true)}, [])
+
     if (!userData) {
         return <div className={classNames(styles.navbar, {}, [classname])}>
             <ThemeSwitcher/>
@@ -34,6 +40,8 @@ export const Navbar = memo(function Navbar({ classname } : NavbarProps) {
         <AppLink to="/info">{t('Информация')}</AppLink>
         <AppLink to="/profile">{t('Профиль')}</AppLink>
         <ThemeSwitcher/>
+        <Button onClick={onProfileClick}>Профиль</Button>
         <Button onClick={onLogoutClick}>Выйти</Button>
+        <ProfileModal open={isOpen} onClose={onClose}/>
     </div>
 })

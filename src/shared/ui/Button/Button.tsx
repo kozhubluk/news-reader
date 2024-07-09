@@ -8,7 +8,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export enum ButtonTheme {
-    OUTLINE = 'outline'
+    OUTLINE = 'outline',
+    FILLED = 'filled'
 }
 
 export const Button = memo(function Button(props: ButtonProps) {

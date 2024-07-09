@@ -23,7 +23,7 @@ export const DynamicReducerLoader: React.FC<DynamicReducerLoaderProps> = (props)
         // удаляем при демонтировании
         return () => {
             if (removeAfterUnmount) {
-                store.reducerManager.remove('login' )
+                store.reducerManager.remove(keyName)
                 dispatch({ type: `DESTROY ${keyName}`  })
             }
         }

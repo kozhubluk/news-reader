@@ -8,7 +8,7 @@ import { authUserByUsername } from "features/auth/model/services/authUserByUsern
 import { selectLoginState } from "features/auth/model/selectors/selectLoginState";
 import { DynamicReducerLoader } from "shared/ui/DynamicReducerLoader/DynamicReducerLoader";
 import { useAppDispatch } from "shared/lib/hooks/useDispatch";
-import { memo, useCallback } from "react";
+import { ChangeEvent, memo, useCallback } from "react";
 
 interface LoginFormProps {
     className?: string
@@ -21,12 +21,12 @@ const LoginForm = memo(function LoginForm(props: LoginFormProps) {
 
     const dispatch = useAppDispatch()
 
-    const onChangeUsername = useCallback((value: string) => {
-        dispatch(setUsername(value))
+    const onChangeUsername = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setUsername(e.target.value))
     }, [dispatch])
 
-    const onChangePassword = useCallback((value: string) => {
-        dispatch(setPassword(value))
+    const onChangePassword = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setPassword(e.target.value))
     }, [dispatch])
 
     const onAuth = useCallback(async () => {

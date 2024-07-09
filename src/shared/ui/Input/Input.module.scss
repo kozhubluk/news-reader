@@ -1,3 +1,22 @@
 .Input {
-  border-radius: 10px;
+  display: block;
+  border-radius: var(--border-radius-m);
+  padding: 12px;
+  border: var(--border-width) var(--secondary-background-color) solid;
+  transition: .15s;
+  background-color: var(--background-color);
+
+  &::placeholder {
+    color: var(--secondary-color);
+  }
+
+  &:hover {
+    border-color: var(--highlighted-secondary-background-color);
+    background-color: var(--highlighted-background-color);
+  }
+
+  &:focus {
+    background-color: var(--background-color);
+    border-color: var(--primary-color);
+  }
 }

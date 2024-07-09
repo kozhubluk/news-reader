@@ -13,10 +13,6 @@ interface ProfileCardProps {
 export const ProfileCard: React.FC<ProfileCardProps> = (props) => {
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        dispatch(fetchProfileData());
-    }, [dispatch]);
-
     const data = useSelector((state: StateSchema) => state.profile)
     console.log(data)
 
