@@ -6,13 +6,13 @@ import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { GenderSelection } from "widgets/GenderSelection/ui/GenderSelection";
 import { DynamicReducerLoader } from "shared/ui/DynamicReducerLoader/DynamicReducerLoader";
 import { profileReducer } from "enities/profile/model/slice/profileSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchProfileData } from "enities/profile/model/services/fetchProfileData";
 import { useSelector } from "react-redux";
 import { selectProfileState } from "enities/profile/model/selectors/selectProfileState";
 import { useAppDispatch } from "shared/lib/hooks/useDispatch";
 import { useFormik } from "formik";
-import { Profile } from "enities/profile/model/types/ProfileSchema";
+import { Gender, Profile } from "enities/profile/model/types/ProfileSchema";
 import { validateProfileData } from "enities/profile/model/services/validateProfileForm";
 
 interface ProfileEditFormProps {
@@ -27,9 +27,9 @@ export const ProfileEditForm: React.FC<ProfileEditFormProps> = (props) => {
     const formik = useFormik<Profile>({
         initialValues: {
             ...profile,
-            username: 'check'
         },
         validate: validateProfileData,
+        enableReinitialize: true,
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
         },
@@ -38,13 +38,13 @@ export const ProfileEditForm: React.FC<ProfileEditFormProps> = (props) => {
     useEffect(() => {
         (async () => {
 
-            const response = await dispatch(fetchProfileData())
-            console.log(response)
+            const { payload } = await dispatch(fetchProfileData())
+            console.log(payload)
 
         })()
     }, []);
 
-    return <DynamicReducerLoader keyName='profile' reducer={profileReducer}>
+    return <DynamicReducerLoader keyName='profile' reducer={profileReducer} removeAfterUnmount={false}>
         {!loading ?
             <div className={classNames(styles.ProfileEditForm, {}, [className])}>
                 <div className={styles.headerWrapper}>
@@ -53,27 +53,63 @@ export const ProfileEditForm: React.FC<ProfileEditFormProps> = (props) => {
                 <form onSubmit={formik.handleSubmit}>
                     <div className={styles.formBlock}>
                         <Text>Как к вам обращаться?</Text>
-                        <Input onChange={formik.handleChange} id="username"
-                            name="username"
-                            value={formik.values.username} placeholder={'Публичное имя'}/>
-                        <Text size={TextSize.SMALL} theme={TextTheme.SECONDARY}>Это имя будет отображаться в
-                            комментариях</Text>
+                        <Input onChange={formik.handleChange}
+                            id='username'
+                            name='username'
+                            onBlur={formik.handleBlur}
+                            value={formik.values.username}
+                            error={!!formik.errors.username}
+                            placeholder={'Публичное имя'}
+                        />
+                        {formik.errors.username ?
+                            <Text size={TextSize.SMALL} theme={TextTheme.ERROR}>
+                                <>{formik.errors.username}</>
+                            </Text>
+                            :
+                            <Text size={TextSize.SMALL} theme={TextTheme.SECONDARY}>
+                                Это имя будет отображаться в комментариях
+                            </Text>
+                        }
                     </div>
                     <div className={styles.formBlock}>
                         <Text>Персональные данные</Text>
                         <Text>Имя и Фамилия</Text>
-                        <Input placeholder={'Имя'}/>
-                        <Input placeholder={'Фамилия'}/>
+                        <Input onChange={formik.handleChange}
+                            id='name'
+                            name='name'
+                            value={formik.values.name}
+                            error={!!formik.errors.name}
+                            placeholder={'Имя'}
+                        />
+                        {formik.errors.name &&
+                            <Text size={TextSize.SMALL} theme={TextTheme.ERROR}>
+                                <>{formik.errors.name}</>
+                            </Text>
+                        }
+                        <Input
+                            id='surname'
+                            name={'surname'}
+                            value={formik.values.surname}
+                            onChange={formik.handleChange}
+                            error={!!formik.errors.surname}
+                            placeholder={'Фамилия'}
+                        />
+                        {formik.errors.surname &&
+                            <Text size={TextSize.SMALL} theme={TextTheme.ERROR}>
+                                <>{formik.errors.surname}</>
+                            </Text>
+                        }
                         <div className={styles.bottomBlock}>
                             <Text>Пол</Text>
                             <Text>Дата рождения</Text>
-                            <GenderSelection/>
+                            <GenderSelection gender={formik.values.gender}
+                                setGender={(gender: Gender) => {formik.setFieldValue('gender', gender)}} />
                             <Input type='date'
+                                id='birthdate'
+                                name='birthdate'
                                 max="2022-12-31"
-                                value={'2003-04-02'}
-                                onChange={(e) => {
-                                    console.log(typeof e)
-                                }}
+                                value={formik.values.birthdate}
+                                onChange={formik.handleChange}
                             />
                             <Button type='submit' className={styles.button}
                                 theme={ButtonTheme.FILLED}>Сохранить</Button>
@@ -82,7 +118,9 @@ export const ProfileEditForm: React.FC<ProfileEditFormProps> = (props) => {
                 </form>
             </div> 
             : 
-            <div>Загрузка...</div>
+            <div>
+                Загрузка...
+            </div>
         }
     </DynamicReducerLoader>
 }

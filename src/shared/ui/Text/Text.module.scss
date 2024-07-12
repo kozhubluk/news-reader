@@ -6,7 +6,7 @@
 // размерности текста
 
 .small {
-  font: var(--font-height-s);
+  font: var(--font-s);
 }
 
 .middle {
@@ -29,4 +29,8 @@
 
 .secondary {
   color: var(--secondary-color);
+}
+
+.error {
+  color: var(--error-color);
 }

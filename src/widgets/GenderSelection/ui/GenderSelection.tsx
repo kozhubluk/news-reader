@@ -2,7 +2,7 @@ import { classNames } from 'shared/lib/classNames/classNames'
 import * as styles from './GenderSelection.module.scss'
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { Gender } from "enities/profile/model/types/ProfileSchema";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 
 interface GenderSelectionProps {
     gender?: Gender
@@ -10,7 +10,7 @@ interface GenderSelectionProps {
     className?: string
 }
 
-export const GenderSelection: React.FC<GenderSelectionProps> = (props) => {
+export const GenderSelection= memo(function GenderSelection(props: GenderSelectionProps) {
     const { className, gender = 'male', setGender } = props
 
     const genders: Array<{name: string, value: Gender}> = [
@@ -28,6 +28,7 @@ export const GenderSelection: React.FC<GenderSelectionProps> = (props) => {
     return <div className={classNames(styles.GenderSelection, {}, [className])}>
         {genders.map((item) => (
             <Button key={item.value}
+                type='button'
                 theme={ButtonTheme.FILLED}
                 className={classNames(styles.button, { [styles.selected]: gender === item.value })}
                 onClick={() => {onSelectGender(item.value)}}
@@ -36,4 +37,4 @@ export const GenderSelection: React.FC<GenderSelectionProps> = (props) => {
             </Button>
         ))}
     </div>
-}
+})

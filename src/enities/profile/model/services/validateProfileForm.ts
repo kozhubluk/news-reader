@@ -10,15 +10,15 @@ export const validateProfileData = (values: Profile) => {
         errors.username = 'Длина имени должна быть от 3 до 32 символов';
     }
 
-    if (!values.username) {
-        errors.username = 'Пожалуйста, введите имя';
-    } else if (values.username.length > 32) {
-        errors.username = 'Длина имени не может превышать 32 символов';
+    if (!values.name) {
+        errors.name = 'Пожалуйста, введите имя';
+    } else if (values.name.length > 32) {
+        errors.name = 'Длина имени не может превышать 32 символов';
     }
 
     if (!values.surname) {
-        errors.surname = 'Пожалуйста, введите имя';
-    } else if (values.username.length > 44) {
+        errors.surname = 'Пожалуйста, введите фамилию';
+    } else if (values.surname.length > 44) {
         errors.surname = 'Длина фамилии не может превышать 32 символов';
     }
 

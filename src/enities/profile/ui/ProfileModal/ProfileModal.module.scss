@@ -1,3 +1,22 @@
 .ProfileModal {
-  background-color: red;
+  overflow: hidden;
+
+  &>div {
+    overflow-y: scroll;
+    max-height: 500px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 16px;
+    border-radius: 0 var(--border-radius-m) var(--border-radius-m) 0;
+    background-color: var(--background-color);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--background-color);
+
+    &:hover {
+      background-color: var(--highlighted-secondary-background-color);
+    }
+  }
 }

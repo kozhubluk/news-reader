@@ -1,10 +1,10 @@
 import { classNames } from 'shared/lib/classNames/classNames'
 import * as styles from './Text.module.scss'
-import { HTMLAttributes, memo } from 'react'
+import { HTMLAttributes, memo, ReactNode } from 'react'
 
 interface TextProps extends HTMLAttributes<HTMLDivElement> {
     className?: string,
-    children?: string
+    children?: string | ReactNode
     theme?: TextTheme
     size?: TextSize
 }
