@@ -6,7 +6,7 @@ import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { GenderSelection } from "widgets/GenderSelection/ui/GenderSelection";
 import { DynamicReducerLoader } from "shared/ui/DynamicReducerLoader/DynamicReducerLoader";
 import { profileReducer } from "enities/profile/model/slice/profileSlice";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { fetchProfileData } from "enities/profile/model/services/fetchProfileData";
 import { useSelector } from "react-redux";
 import { selectProfileState } from "enities/profile/model/selectors/selectProfileState";
@@ -14,38 +14,65 @@ import { useAppDispatch } from "shared/lib/hooks/useDispatch";
 import { useFormik } from "formik";
 import { Gender, Profile } from "enities/profile/model/types/ProfileSchema";
 import { validateProfileData } from "enities/profile/model/services/validateProfileForm";
+import { updateProfileData } from "enities/profile/model/services/updateProfileData";
+import { Preloader, PreloaderSize } from "shared/ui/Preloader/Preloader";
 
 interface ProfileEditFormProps {
     className?: string
+    onSuccess?: () => void
+    onError?: () => void
 }
 
 export const ProfileEditForm: React.FC<ProfileEditFormProps> = (props) => {
-    const { className } = props
-    const { profile, error, loading } = useSelector(selectProfileState)
+    const { className, onSuccess, onError } = props
+    const {
+        profile,
+        error,
+        loading
+    } = useSelector(selectProfileState)
+
+    const { fetch: fetchLoading, update: updateLoading } = loading
+    const { fetch: fetchError, update: updateError } = error
+
     const dispatch = useAppDispatch()
 
     const formik = useFormik<Profile>({
         initialValues: {
+            gender: "male",
             ...profile,
         },
         validate: validateProfileData,
         enableReinitialize: true,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: async () => {
+            if (Object.keys(formik.errors).length === 0) {
+                const { meta } = await dispatch(updateProfileData(formik.values))
+                if (meta.requestStatus === 'fulfilled' && onSuccess) {
+                    onSuccess()
+                }
+            }
         },
     })
 
+    const { setFieldValue } = formik
+
+    const setGender = useCallback((gender: Gender) => {setFieldValue('gender', gender)},
+        [setFieldValue])
+
     useEffect(() => {
         (async () => {
-
-            const { payload } = await dispatch(fetchProfileData())
-            console.log(payload)
-
+            const { meta } = await dispatch(fetchProfileData())
+            if (meta.requestStatus === 'rejected' && onError) {
+                onError()
+            }
         })()
-    }, []);
+    }, [])
+
+    if (fetchError) {
+        return <div>error</div>
+    }
 
     return <DynamicReducerLoader keyName='profile' reducer={profileReducer} removeAfterUnmount={false}>
-        {!loading ?
+        {!fetchLoading ?
             <div className={classNames(styles.ProfileEditForm, {}, [className])}>
                 <div className={styles.headerWrapper}>
                     <Text className={styles.header} size={TextSize.LARGE}>Ваш профиль</Text>
@@ -103,23 +130,32 @@ export const ProfileEditForm: React.FC<ProfileEditFormProps> = (props) => {
                             <Text>Пол</Text>
                             <Text>Дата рождения</Text>
                             <GenderSelection gender={formik.values.gender}
-                                setGender={(gender: Gender) => {formik.setFieldValue('gender', gender)}} />
+                                setGender={setGender} />
                             <Input type='date'
                                 id='birthdate'
                                 name='birthdate'
+                                error={!!formik.errors.birthdate}
                                 max="2022-12-31"
                                 value={formik.values.birthdate}
                                 onChange={formik.handleChange}
                             />
-                            <Button type='submit' className={styles.button}
-                                theme={ButtonTheme.FILLED}>Сохранить</Button>
+                            {updateError &&
+                                <Text size={TextSize.SMALL} className={styles.error} theme={TextTheme.ERROR}>
+                                    {updateError}
+                                </Text>}
+                            <Button type='submit' className={styles.button} theme={ButtonTheme.FILLED}>
+                                {updateLoading ?
+                                    <Preloader size={PreloaderSize.SMALL} className={styles['small-preloader']}/>
+                                    : 'Сохранить'
+                                }
+                            </Button>
                         </div>
                     </div>
                 </form>
             </div> 
             : 
-            <div>
-                Загрузка...
+            <div  className={styles.preloader}>
+                <Preloader/>
             </div>
         }
     </DynamicReducerLoader>

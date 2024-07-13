@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Profile, ProfileSchema } from "enities/profile/model/types/ProfileSchema";
 import { fetchProfileData } from "enities/profile/model/services/fetchProfileData";
+import { updateProfileData } from "enities/profile/model/services/updateProfileData";
 
 const initialState: ProfileSchema = {
     profile: {
@@ -9,7 +10,11 @@ const initialState: ProfileSchema = {
         surname: '',
         gender: 'male',
     },
-    loading: false
+    loading: {
+        fetch: false,
+        update: false
+    },
+    error: {}
 }
 
 export const profileSlice = createSlice({
@@ -23,15 +28,27 @@ export const profileSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchProfileData.pending, (state) => {
-                state.loading = true
+                state.loading.fetch = true
             })
             .addCase(fetchProfileData.fulfilled, (state) => {
-                state.loading = false
-                state.error = undefined
+                state.loading.fetch = false
+                state.error.fetch = undefined
             })
             .addCase(fetchProfileData.rejected, (state, action: PayloadAction<string | undefined>) => {
-                state.loading = false
-                state.error = action.payload
+                state.loading.fetch = false
+                state.error.fetch = action.payload
+            })
+
+            .addCase(updateProfileData.pending, (state) => {
+                state.loading.update = true
+            })
+            .addCase(updateProfileData.fulfilled, (state) => {
+                state.loading.update = false
+                state.error.update = undefined
+            })
+            .addCase(updateProfileData.rejected, (state, action: PayloadAction<string | undefined>) => {
+                state.loading.update = false
+                state.error.update = action.payload
             })
     }
 })

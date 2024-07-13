@@ -1,7 +1,9 @@
 .ProfileModal {
   overflow: hidden;
+  width: 400px;
+  height: 500px;
 
-  &>div {
+  & > div {
     overflow-y: scroll;
     max-height: 500px;
   }

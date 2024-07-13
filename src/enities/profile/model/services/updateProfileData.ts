@@ -10,12 +10,12 @@ Profile,
     async (body, thunkAPI) => {
         try {
             const response = await thunkAPI
-                .extra.api.put<Profile>('profile')
+                .extra.api.put<Profile>('profile', body)
             thunkAPI.dispatch(setProfileData(response.data))
 
             return response.data
         } catch (e) {
-            return thunkAPI.rejectWithValue('some error')
+            return thunkAPI.rejectWithValue('Не удалось выполнить запрос, повторите попытку позже')
         }
     }
 )

@@ -1,0 +1,74 @@
+.Preloader,
+.Preloader div {
+  box-sizing: border-box;
+}
+
+.Preloader {
+  color: var(--primary-color);
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.Preloader div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  border-color: currentcolor transparent transparent;
+}
+
+.Preloader div:nth-child(1) {
+  animation-delay: -0.3s;
+}
+
+.Preloader div:nth-child(2) {
+  animation-delay: -0.2s;
+}
+
+.Preloader div:nth-child(3) {
+  animation-delay: -0.1s;
+}
+
+// размерности
+
+@mixin preloader-size($size) {
+  width: $size;
+  height: $size;
+
+  div {
+    width: $size;
+    height: $size;
+    border: calc($size / 8) solid currentcolor;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: currentcolor transparent transparent;
+  }
+}
+
+.large {
+
+  @include preloader-size(64px)
+}
+
+.middle {
+
+  @include preloader-size(32px)
+}
+
+.small {
+
+  @include preloader-size(16px)
+}
+
+// анимация
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
