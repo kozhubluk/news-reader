@@ -1,0 +1,1 @@
+export { NewsFeedAsync as NewsFeed } from './ui/NewsFeed.async'

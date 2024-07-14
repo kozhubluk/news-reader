@@ -10,6 +10,6 @@ interface ProfileModalProps {
 export const ProfileModal: React.FC<ProfileModalProps> = (props) => {
     const { open, onClose } = props
     return <Modal className={styles.ProfileModal} lazy={false} isOpen={open} onClose={onClose}>
-        <ProfileEditForm onSuccess={onClose} onError={onClose}/>
+        <ProfileEditForm onSuccess={onClose}/>
     </Modal>
 }

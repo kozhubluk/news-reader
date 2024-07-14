@@ -22,6 +22,7 @@ export function buildWebpackConfig (options: BuildOptions): webpack.Configuratio
         output: {
             filename: 'bundle.js',
             path: output,
+            publicPath: '/',
             clean: true
         }
     }

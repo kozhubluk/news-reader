@@ -20,11 +20,10 @@ import { Preloader, PreloaderSize } from "shared/ui/Preloader/Preloader";
 interface ProfileEditFormProps {
     className?: string
     onSuccess?: () => void
-    onError?: () => void
 }
 
 export const ProfileEditForm: React.FC<ProfileEditFormProps> = (props) => {
-    const { className, onSuccess, onError } = props
+    const { className, onSuccess } = props
     const {
         profile,
         error,
@@ -61,9 +60,6 @@ export const ProfileEditForm: React.FC<ProfileEditFormProps> = (props) => {
     useEffect(() => {
         (async () => {
             const { meta } = await dispatch(fetchProfileData())
-            if (meta.requestStatus === 'rejected' && onError) {
-                onError()
-            }
         })()
     }, [])
 
