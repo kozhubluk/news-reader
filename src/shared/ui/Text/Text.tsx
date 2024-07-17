@@ -10,7 +10,7 @@ interface TextProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export enum TextTheme {
-    HEADER = 'header',
+    BOLD = 'bold',
     PRIMARY = 'primary',
     SECONDARY = 'secondary',
     ERROR = 'error',

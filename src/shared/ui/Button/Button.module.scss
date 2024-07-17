@@ -1,6 +1,7 @@
 .Button {
   display: block;
   border-radius: var(--border-radius-m);
+  font: var(--font-m);
 
   &:disabled {
     opacity: 0.5;

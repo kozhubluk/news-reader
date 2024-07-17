@@ -5,8 +5,10 @@
   border: var(--border-width) var(--secondary-background-color) solid;
   transition: .15s;
   background-color: var(--background-color);
+  font: var(--font-m);
 
   &::placeholder {
+    font: var(--font-m);
     color: var(--secondary-color);
   }
 

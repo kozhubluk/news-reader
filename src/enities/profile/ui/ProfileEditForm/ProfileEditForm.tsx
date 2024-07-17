@@ -70,8 +70,8 @@ export const ProfileEditForm: React.FC<ProfileEditFormProps> = (props) => {
     return <DynamicReducerLoader keyName='profile' reducer={profileReducer} removeAfterUnmount={false}>
         {!fetchLoading ?
             <div className={classNames(styles.ProfileEditForm, {}, [className])}>
-                <div className={styles.headerWrapper}>
-                    <Text className={styles.header} size={TextSize.LARGE}>Ваш профиль</Text>
+                <div className={styles.header}>
+                    <Text theme={TextTheme.BOLD} size={TextSize.EXTRA_LARGE}>Ваш профиль</Text>
                 </div>
                 <form onSubmit={formik.handleSubmit}>
                     <div className={styles.formBlock}>
@@ -95,7 +95,7 @@ export const ProfileEditForm: React.FC<ProfileEditFormProps> = (props) => {
                         }
                     </div>
                     <div className={styles.formBlock}>
-                        <Text>Персональные данные</Text>
+                        <Text size={TextSize.LARGE} theme={TextTheme.BOLD}>Персональные данные</Text>
                         <Text>Имя и Фамилия</Text>
                         <Input onChange={formik.handleChange}
                             id='name'
@@ -142,7 +142,7 @@ export const ProfileEditForm: React.FC<ProfileEditFormProps> = (props) => {
                             <Button type='submit' className={styles.button} theme={ButtonTheme.FILLED}>
                                 {updateLoading ?
                                     <Preloader size={PreloaderSize.SMALL} className={styles['small-preloader']}/>
-                                    : 'Сохранить'
+                                    : <Text className={styles.buttonText} theme={TextTheme.BOLD}>Сохранить</Text>
                                 }
                             </Button>
                         </div>

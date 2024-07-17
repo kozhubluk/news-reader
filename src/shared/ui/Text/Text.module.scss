@@ -1,6 +1,5 @@
 .Text{
-  font-size: var(--font-height-s);
-  color: var(--primary-color);
+  font-size: var(--font-m);
 }
 
 // размерности текста
@@ -21,7 +20,7 @@
   font: var(--font-xl)
 }
 
-// Темы кнопок
+// Темы текста
 
 .primary {
   color: var(--primary-color);
@@ -33,4 +32,8 @@
 
 .error {
   color: var(--error-color);
+}
+
+.bold {
+  font-weight: var(--bold-font-weight);
 }

@@ -36,6 +36,5 @@ export const App: React.FC = () => {
                 <AppRoutes/>
             </div>
         </Suspense>
-
     </div>
 }

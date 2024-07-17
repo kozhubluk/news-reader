@@ -6,6 +6,10 @@
   & > div {
     overflow-y: scroll;
     max-height: 500px;
+
+    form > div:last-child {
+      border-radius: var(--border-radius-m) var(--border-radius-m) 0 0 !important;
+    }
   }
 
   ::-webkit-scrollbar {

@@ -1,6 +1,7 @@
 :root {
   --font-family: "Mulish", sans-serif;
   --font-weight: 400;
+  --bold-font-weight: 650;
 
   // стандартный шрифт
   --font-size-m: 16px;
@@ -18,8 +19,8 @@
   --font-l: var(--font-weight) var(--font-size-l) / var(--font-height-l) var(--font-family);
 
   // увеличенный шрифт х2
-  --font-size-xl: 32px;
-  --font-height-xl: 40px;
+  --font-size-xl: 28px;
+  --font-height-xl: 35px;
   --font-xl: var(--font-weight) var(--font-size-xl) / var(--font-height-xl) var(--font-family);
 
   // размерности

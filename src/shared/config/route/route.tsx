@@ -3,7 +3,7 @@ import { MainPage } from 'pages/MainPage'
 import { InfoPage } from 'pages/InfoPage'
 import { NotFoundPage } from 'pages/NotFoundPage'
 import { ProfilePage } from "pages/ProfilePage";
-import { Article } from "pages/Article";
+import { ArticlePage } from "pages/Article";
 import { NewsFeed } from "pages/NewsFeed";
 
 enum Route {
@@ -19,7 +19,7 @@ const RoutePaths: Record<Route, string> = {
     [Route.MAIN]: '/',
     [Route.INFO]: '/info',
     [Route.PROFILE]: '/profile',
-    [Route.NEWS_FEED]: '/news',
+    [Route.NEWS_FEED]: '/article',
     [Route.ARTICLE]: '/article/',
     [Route.NOT_FOUND]: '*'
 }
@@ -43,11 +43,10 @@ export const routeConfig: Record<Route, RouteProps> = {
     },
     [Route.ARTICLE]: {
         path: `${RoutePaths.article}:id`,
-        element: <Article/>
+        element: <ArticlePage/>
     },
     [Route.NOT_FOUND]: {
         path: RoutePaths.notFound,
         element: <NotFoundPage />
     },
-
 }
