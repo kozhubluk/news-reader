@@ -29,7 +29,15 @@ export const Article: React.FC<ArticleProps> = (props) => {
     }, [dispatch, id]);
 
     if (isLoading) {
-        return <div>Loading</div>
+        return <div className={classNames(styles.Article, {}, [className])}>
+            <Skeleton width='100%' height='35px' border='12px'/>
+            <div className={styles.articleInfo}>
+                <Skeleton width='70px' height='20px' border='6px'/>
+                <Skeleton width='80px' height='20px' border='6px'/>
+            </div>
+            <Skeleton width='100%' height='180px' border='12px'/>
+            <Skeleton width='100%' height='280px' border='12px'/>
+        </div>
     } else if (error) {
         return <div>err</div>
     }
@@ -38,11 +46,10 @@ export const Article: React.FC<ArticleProps> = (props) => {
         <div className={classNames(styles.Article, {}, [className])}>
             <Text size={TextSize.EXTRA_LARGE} theme={TextTheme.BOLD}>{article?.title}</Text>
             <div className={styles.articleInfo}>
-                <Text size={TextSize.SMALL} theme={TextTheme.SECONDARY}>{article?.date}</Text>
-                <Text size={TextSize.SMALL} theme={TextTheme.SECONDARY}>{article?.views} просмотров</Text>
+                <Text className={styles.info} size={TextSize.SMALL} theme={TextTheme.SECONDARY}>{article?.date}</Text>
+                <Text className={styles.info} size={TextSize.SMALL} theme={TextTheme.SECONDARY}>{article?.views} просмотров</Text>
             </div>
             {article?.blocks.map(item => item.type === BlockType.IMAGE ? <div>kartinka</div> : <Text>co</Text>)}
         </div>
-        <Skeleton width='100px' height='100px' border='50%'/>
     </DynamicReducerLoader>
 }

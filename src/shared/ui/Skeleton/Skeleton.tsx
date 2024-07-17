@@ -4,9 +4,9 @@ import { CSSProperties } from "react";
 
 interface SkeletonProps {
     className?: string
-    width: string
-    height: string
-    border: string
+    width?: string
+    height?: string
+    border?: string
 }
 
 export const Skeleton: React.FC<SkeletonProps> = (props) => {

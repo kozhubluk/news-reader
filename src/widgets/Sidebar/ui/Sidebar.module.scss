@@ -1,8 +1,8 @@
 .sidebar {
-  background-color: pink;
   height: 100vh;
   width: var(--sidebar-width);
   transition: .3s;
+  position: fixed;
 }
 
 .hidden {

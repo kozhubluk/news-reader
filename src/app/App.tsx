@@ -30,7 +30,7 @@ export const App: React.FC = () => {
             <Navbar/>
             <LangSwitcher/>
             <div className='content'>
-                <Button onClick={()=>{setOpen(true)}}>открыть</Button>
+                {/*<Button onClick={()=>{setOpen(true)}}>открыть</Button>*/}
                 {open && <LoginModal isOpen={open} onClose={close}/>}
                 <Sidebar/>
                 <AppRoutes/>
