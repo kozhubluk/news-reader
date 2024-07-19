@@ -1,15 +1,17 @@
 import { classNames } from 'shared/lib/classNames/classNames'
 import * as styles from './Article.module.scss'
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAppDispatch } from "shared/lib/hooks/useDispatch";
 import { fetchArticle } from "enities/article/model/services/fetchArticle";
 import { selectArticleState } from "enities/article/model/selectors/selectArticleState";
 import { useSelector } from "react-redux";
 import { DynamicReducerLoader } from "shared/ui/DynamicReducerLoader/DynamicReducerLoader";
 import { articleReducer } from "enities/article/model/slice/ArticleSlice";
-import { BlockType } from "enities/article/model/types/ArticleSchems";
+import { ArticleBlock, ArticleImage, BlockType } from "enities/article/model/types/ArticleSchems";
 import { Text, TextSize, TextTheme } from "shared/ui/Text/Text";
 import { Skeleton } from "shared/ui/Skeleton/Skeleton";
+import { ArticleTextBlock } from "enities/article/ui/ArticleTextBlock/ArticleTextBlock";
+import { ArticleImageBlock } from "enities/article/ui/ArticleImageBlock/ArticleImageBlock";
 
 interface ArticleProps {
     className?: string
@@ -27,6 +29,20 @@ export const Article: React.FC<ArticleProps> = (props) => {
             dispatch(fetchArticle(id))
         }
     }, [dispatch, id]);
+
+    const renderBlock = useCallback((block: ArticleBlock) => {
+        switch (block.type) {
+            case BlockType.SUBTITLE:
+                if ("text" in block) return <Text key={block.id} size={TextSize.LARGE} theme={TextTheme.BOLD}>{block.text}</Text>
+            case BlockType.TEXT:
+            case BlockType.QUOTE:
+                if ("paragraphs" in block) return <ArticleTextBlock key={block.id} block={block}/>
+            case BlockType.IMAGE:
+                if ("src" in block) return <ArticleImageBlock key={block.id} block={block}/>
+            default:
+                return null
+        }
+    }, [])
 
     if (isLoading) {
         return <div className={classNames(styles.Article, {}, [className])}>
@@ -47,9 +63,11 @@ export const Article: React.FC<ArticleProps> = (props) => {
             <Text size={TextSize.EXTRA_LARGE} theme={TextTheme.BOLD}>{article?.title}</Text>
             <div className={styles.articleInfo}>
                 <Text className={styles.info} size={TextSize.SMALL} theme={TextTheme.SECONDARY}>{article?.date}</Text>
-                <Text className={styles.info} size={TextSize.SMALL} theme={TextTheme.SECONDARY}>{article?.views} просмотров</Text>
+                <Text className={styles.info} size={TextSize.SMALL} theme={TextTheme.SECONDARY}>
+                    {article?.views} просмотров
+                </Text>
             </div>
-            {article?.blocks.map(item => item.type === BlockType.IMAGE ? <div>kartinka</div> : <Text>co</Text>)}
+            {article?.blocks.map((block: ArticleBlock) => renderBlock(block))}
         </div>
     </DynamicReducerLoader>
 }

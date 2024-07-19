@@ -1,0 +1,10 @@
+.ArticleTextBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quote {
+  padding: 12px 0 12px 15px;
+  border-left: 3px var(--primary-color) solid;
+}

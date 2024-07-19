@@ -8,9 +8,23 @@ export enum BlockType {
 interface Block {
     id: string
     type: BlockType
-    text?: string
-    src?: string
 }
+
+export interface ArticleText extends Block{
+    paragraphs: string[]
+}
+
+export interface ArticleImage extends Block {
+    src: string
+    text?: string
+    subtitle?: string
+}
+
+interface ArticleSubtitle extends Block {
+    text: string
+}
+
+export type ArticleBlock = ArticleSubtitle | ArticleText | ArticleImage
 
 export interface Article {
     id: string
@@ -18,7 +32,7 @@ export interface Article {
     tags: string[]
     date: string
     views: number
-    blocks: Block[]
+    blocks: ArticleBlock[]
 }
 
 export interface ArticleSchema {
